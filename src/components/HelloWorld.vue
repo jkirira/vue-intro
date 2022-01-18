@@ -41,14 +41,16 @@
           <h3>Saved Tasks</h3>
           <ul>
             <div class="task-list">
-              <li v-for="(task) in tasks" :key="task.id">
+
+              <li v-for="(task, index) in tasks" :key="index">
                 <div class="action-icons">
-                  <p v-bind:id="task.id">Edit</p>
                   <p v-bind:id="task.id" @click="delete_task">Delete</p>
                 </div>
                 <p>Task name: {{task.name}}</p>
-                <p>Descrpition: {{task.description}}</p>
+                <p>Description: {{task.description}}</p>
+                <p><input type="checkbox" v-bind:id="task.id" v-model="checked[index]" :checked="task.remind_me" @change="set_reminder" /><label for="reminder">Set Reminder</label></p>
               </li>
+
             </div>
           </ul> 
       </div>
@@ -61,8 +63,8 @@
           <h3>Reminders</h3>
           <ul>
             <div class="reminders-list">
-              <li v-for="(reminder, index) in reminders" :key="index">
-                <p><span class="circle-span"></span>{{reminder.name}}</p>
+              <li v-for="task in tasks" :key="task.id">
+                <p v-show="task.remind_me"><span class="circle-span"></span>{{task.name}}</p>
               </li>
             </div>
           </ul> 
@@ -85,14 +87,12 @@ export default {
       rawHTML: `<h5>Enter a task</h5>`,
       task_name: '',
       task_description: '',
-      remind_me: '',
+      remind_me: false,
+      checked:[],
       description_disabled: true,
       tasks: [
-          {id:'1', name: "Report", description: "Daily Report"},
-          {id:'2', name: "Meeting", description: "Afternoon Discussion"},
-      ],
-      reminders: [
-        { id:'1', name: "Meeting", description: "Afternoon Discussion"},
+          {id:'1', name: "Report", description: "Daily Report", remind_me: true},
+          {id:'2', name: "Meeting", description: "Afternoon Discussion", remind_me:false},
       ]
     }
 },
@@ -105,8 +105,14 @@ methods: {
     delete_task(e){
       // if(confirm("Are You sure")){}s
       console.log(e.target.id)
-      // this.tasks = this.tasks.filter(t => t.id == e.id)
-    }
+      this.tasks = this.tasks.filter((t) => { return t.id == e.target.id })
+    },
+    set_reminder(e){
+      // console.log(e.target.getAttribute("data-id"))
+      let t = this.tasks.find(task => task.id = e.target.id)
+      t['remind_me'] = !t['remind_me']
+      console.log(t)
+    },
   }
 }
 </script>
