@@ -27,7 +27,7 @@
 
         <div class="form-entry">
           <div class="label-div">
-            <input type="checkbox" id="reminder" v:model="remind_me" /><label for="reminder">Set Reminder</label>
+            <input type="checkbox" id="reminder" v-model="remind_me" /><label for="reminder">Set Reminder</label>
           </div>
         </div>
 
@@ -99,13 +99,14 @@ export default {
 methods: {
     add(e){
       e.preventDefault();
-      this.tasks.push({name: this.task_name, description: this.task_description})
-      alert('Task \'' + this.name + '\' Added!')
+      this.tasks.push({id: this.tasks.length+1, name: this.task_name, description: this.task_description, remind_me: this.remind_me})
+      console.log(this.tasks)
+      alert('Task \'' + this.task_name + '\' Added!')
     },
     delete_task(e){
       // if(confirm("Are You sure")){}s
       console.log(e.target.id)
-      this.tasks = this.tasks.filter((t) => { return t.id == e.target.id })
+      this.tasks = this.tasks.filter((t) => { return t.id != e.target.id })
     },
     set_reminder(e){
       // console.log(e.target.getAttribute("data-id"))

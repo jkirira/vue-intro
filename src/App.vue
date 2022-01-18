@@ -71,16 +71,14 @@ export default {
   justify-content: flex-start;
 }
 .carousel{
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(300px, 1fr));
+  box-sizing: border-box;
+  padding: 0 50px;
 }
 .image-center{
   border: 3px solid greenyellow;
   box-sizing: border-box;
-  padding: 5px;
-  margin: 5px;
   border-radius: 10px;
-  display: flex;
 }
 </style>
