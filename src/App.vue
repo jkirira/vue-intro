@@ -30,7 +30,6 @@
     </div>
     
     <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <Output msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
@@ -83,8 +82,5 @@ export default {
   margin: 5px;
   border-radius: 10px;
   display: flex;
-}
-input[type="checkbox"]{
-
 }
 </style>
