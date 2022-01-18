@@ -1,32 +1,55 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <div class="center">
+      <form>
+        <div class="form-entry">
+          {{ welcome_message }}
+          <p v-html="rawHTML"></p>
+        </div>
+
+        <div class="form-entry">
+          <div class="label-div">
+            <label for="name">Task Name</label>
+          </div>
+          <div class="label-div">
+            <input type="text" id="name" v-model="task_name">
+          </div>
+        </div>
+
+        <div class="form-entry">
+          <div class="label-div">
+            <label for="description" :input='description_disabled = false'>Task Description</label>
+          </div>
+          <div class="label-div">
+            <textarea id="description" v-model="task_description" v-bind:disabled="description_disabled"></textarea>
+          </div>
+        </div>
+
+        <div class="form-entry">
+          <div class="label-div">
+            <input type="checkbox" id="reminder" v:model="remind_me" /><label for="reminder">Set Reminder</label>
+          </div>
+        </div>
+
+        <div class="form-entry">
+            <button v-on:click="add" >Add Task</button>
+        </div>
+
+      </form>
+      
+      <div class>
+          <h3>Saved Tasks</h3>
+          <ul>
+            <div class="task-list">
+              <li v-for="(task, index) in tasks" :key="index">
+                <p>Task name: {{task.name}}</p>
+                <p>Descrpition: {{task.description}}</p>
+              </li>
+            </div>
+          </ul> 
+      </div>
+
+    </div> 
   </div>
 </template>
 
@@ -35,6 +58,30 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data(){
+    return{
+      welcome_message: "Tasks",
+      rawHTML: `<h5>Enter a task</h5>`,
+      task_name: '',
+      task_description: '',
+      remind_me: '',
+      description_disabled: true,
+      tasks: [
+          {name: "Report", description: "Daily Report"},
+          {name: "Meeting", description: "Afternoon Discussion"},
+      ],
+      reminders: [
+        { name: "Meeting", description: "Afternoon Discussion"},
+      ]
+    }
+},
+methods: {
+    add(e){
+      e.preventDefault();
+      this.tasks.push({name: this.task_name, description: this.task_description})
+      alert('Task \'' + this.name + '\' Added!')
+    }
   }
 }
 </script>
@@ -54,5 +101,52 @@ li {
 }
 a {
   color: #42b983;
+}
+.center{
+  margin: auto;
+  width: 50%;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding: 20px 10px;
+  box-sizing: border-box;
+}
+.hello{
+  padding: 30px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+.label-div{
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  padding-left: 35%;
+  box-sizing: border-box;
+  margin-bottom: 5px;
+}
+.task-list{
+  display: flex;
+  flex-direction:column;
+
+}
+.task-list >li{
+    box-sizing: border-box;
+    padding-left: 30%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+      margin-bottom: 3px;
+  border-bottom: 2px solid greenyellow;
+}
+.task-list > li >p{
+  align-self: flex-start;
+}
+.form-entry{
+  display: flex;
+  align-items: center ;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 5px;
 }
 </style>
