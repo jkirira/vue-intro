@@ -48,7 +48,7 @@
                 </div>
                 <p>Task name: {{task.name}}</p>
                 <p>Description: {{task.description}}</p>
-                <p><input type="checkbox" v-bind:id="task.id" v-model="checked[index]" :checked="task.remind_me" @change="set_reminder" /><label for="reminder">Set Reminder</label></p>
+                <p><input type="checkbox" v-model="task.remind_me" :checked="task.remind_me" /><label for="reminder">Set Reminder</label></p>
               </li>
 
             </div>
@@ -63,7 +63,7 @@
           <h3>Reminders</h3>
           <ul>
             <div class="reminders-list">
-              <li v-for="task in tasks" :key="task.id">
+              <li v-for="(task, index) in tasks" :key="index">
                 <p v-show="task.remind_me"><span class="circle-span"></span>{{task.name}}</p>
               </li>
             </div>
