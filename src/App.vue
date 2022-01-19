@@ -82,7 +82,7 @@ export default {
       console.log(task_data)
       this.tasks.unshift({id: this.tasks.length+1, name: task_data.name, description: task_data.description, date: task_data.date, remind_me: task_data.remind_me})
       console.log(this.tasks)
-      alert('Task \'' + this.task_name + '\' Added!')
+      alert('Task \'' + task_data.name + '\' Added!')
     },
     remind(target_id){
       let t = this.tasks.find(task => task.id == target_id)
