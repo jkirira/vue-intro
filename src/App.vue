@@ -18,7 +18,7 @@
         
         <div class="tasks-div">
           <h3>Saved Tasks</h3>
-          <task v-for="(task, index) in tasks" :key="index" v-bind:task="task" >
+          <task v-for="(task, index) in tasks" :key="index" v-bind:task="task" @setReminder="remind" @forgetReminder="dontRemind" >
 
             <template v-slot:task-name>
               {{task.name}}
@@ -83,6 +83,16 @@ export default {
       this.tasks.unshift({id: this.tasks.length+1, name: task_data.name, description: task_data.description, date: task_data.date, remind_me: task_data.remind_me})
       console.log(this.tasks)
       alert('Task \'' + this.task_name + '\' Added!')
+    },
+    remind(target_id){
+      let t = this.tasks.find(task => task.id == target_id)
+      t['remind_me'] = true
+      console.log(t)
+    },
+    dontRemind(target_id){
+      let t = this.tasks.find(task => task.id == target_id)
+      t['remind_me'] = false
+      console.log(t)
     },
   }
 

@@ -19,8 +19,7 @@ export default {
     word-break: break-all;
     box-sizing: border-box;
     padding: 20px 10px;
-    /* display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10%, 1fr)); */
+    margin-top: 10px;
 }
 .name{
     display: flex;

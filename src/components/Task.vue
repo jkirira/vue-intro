@@ -18,8 +18,8 @@
 
         <div class="task-description">{{ task.date }}</div>
         <div class="task-buttons">
-            <custom-button info="Set Reminder" @customClick></custom-button>
-            <custom-button info="Remove Reminder"></custom-button>
+            <custom-button info="Set Reminder" @customClick="emitSetReminder"></custom-button>
+            <custom-button info="Remove Reminder" @customClick="emitForgetReminder"></custom-button>
         </div>
     </div>
 </template>
@@ -37,6 +37,14 @@ export default {
    },
    components: {
        CustomButton,
+   },
+   methods: {
+       emitSetReminder(){
+           this.$emit('setReminder', this.task.id);
+       },
+       emitForgetReminder(){
+           this.$emit('forgetReminder', this.task.id);
+       }
    }
 }
 </script>

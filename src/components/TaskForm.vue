@@ -66,6 +66,7 @@ export default {
             let task_data = { name: this.local_task_name, description: this.local_task_description, date: this.local_task_date, remind_me: this.local_remind_me}
             console.log(task_data)
             this.$emit('add_task', task_data)
+            // console.log(this.data)
         }
     }
 }
