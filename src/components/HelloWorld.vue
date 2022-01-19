@@ -1,41 +1,7 @@
 <template>
   <div class="hello">
     <div class="center">
-      <form>
-        <div class="form-entry">
-          {{ welcome_message }}
-          <p v-html="rawHTML"></p>
-        </div>
-
-        <div class="form-entry">
-          <div class="label-div">
-            <label for="name">Task Name</label>
-          </div>
-          <div class="label-div">
-            <input type="text" id="name" v-model="task_name">
-          </div>
-        </div>
-
-        <div class="form-entry">
-          <div class="label-div">
-            <label for="description" :input='description_disabled = false'>Task Description</label>
-          </div>
-          <div class="label-div">
-            <textarea id="description" v-model="task_description" v-bind:disabled="description_disabled"></textarea>
-          </div>
-        </div>
-
-        <div class="form-entry">
-          <div class="label-div">
-            <input type="checkbox" id="reminder" v-model="remind_me" /><label for="reminder">Set Reminder</label>
-          </div>
-        </div>
-
-        <div class="form-entry">
-            <button v-on:click="add" >Add Task</button>
-        </div>
-
-      </form>
+      
       
       <div class>
           <h3>Saved Tasks</h3>
@@ -83,17 +49,8 @@ export default {
   },
   data(){
     return{
-      welcome_message: "Tasks",
-      rawHTML: `<h5>Enter a task</h5>`,
-      task_name: '',
-      task_description: '',
-      remind_me: false,
-      checked:[],
-      description_disabled: true,
-      tasks: [
-          {id:'1', name: "Report", description: "Daily Report", remind_me: true},
-          {id:'2', name: "Meeting", description: "Afternoon Discussion", remind_me:false},
-      ]
+      
+
     }
 },
 methods: {
@@ -134,20 +91,7 @@ li {
 a {
   color: #42b983;
 }
-.center, .right{
-  width: 100%;
-  border: 2px solid grey;
-  border-radius: 5px;
-  padding: 20px 10px;
-  box-sizing: border-box;
-}
-.center{
-  grid-column: 1;
-}
 
-.right{
-  grid-column: 2;
-}
 
 .hello{
   padding: 20px;
@@ -180,18 +124,7 @@ a {
     border-bottom: 2px solid greenyellow;
     position: relative;
 }
-.action-icons{
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: flex;
-  color: greenyellow;
-}
 
-.action-icons >p {
-  padding: 0 5px;
-  cursor: pointer;
-}
 
 .task-list > li >p{
   align-self: flex-start;
@@ -214,12 +147,5 @@ a {
     box-sizing: border-box;
     padding-left: 15%;
 }
-.circle-span{
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: black;
-  display: block;
-  margin-right: 10px;
-}
+
 </style>
